@@ -48,6 +48,7 @@ jobs:
       # kubectl
       - run: curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key --keyring /etc/apt/keyrings/kubernetes-archive-keyring.gpg add -
       - run: echo "deb [signed-by=/etc/apt/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
+      - run: sudo apt-get update -y
       - run: sudo apt-get install kubectl -y
 
       # pack
