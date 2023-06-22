@@ -10,7 +10,7 @@ $YOUR_CONTAINER_REGISTRY :
 
 Kyma Configurations: 
 NameSpace: Test-ParticipantID
-Kubectl file: <FolderPath>/ParticipantID
+Kubeconfig file: <FolderPath>/ParticipantID
 
 
 
