@@ -21,11 +21,11 @@ GitHub Actions makes it easy to automate all your software workflows, now with w
 
 1. Create a folder `.github` and copy the contents of folder `github-workflows` to it.
 2. Go to Settings > Secrets and variables > Actions and the following secrets:
-    - `IMAGEPULLSECRET`: Secret to pull images from private repository.
+    - `IMAGEPULLSECRET`: The name of the secret to pull images from private repository.
     - `IMAGEREGISTRY`: Your private docker registry.
     - `DOCKER_USERNAME`: Docker username required for pushing images to private registry.
     - `DOCKER_PASSWORD`: Docker password required for pushing images to private registry.
-    - `KUBE_CONFIG`: Base64 encoded Kubeconfig of technical user created in [previous](#create-token-for-technical-user) step.
+    - `KUBE_CONFIG`: Base64 encoded token of technical user created in [previous](#create-token-for-technical-user) step.
 3. Push the code to the main branch.
 
 Next: [Multitenancy](./07-Mulititenancy.md)
