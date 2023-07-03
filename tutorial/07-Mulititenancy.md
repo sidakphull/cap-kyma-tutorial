@@ -80,5 +80,5 @@ docker push $YOUR_CONTAINER_REGISTRY/recap/{Participant_ID}/bookshop-sidecar
 
 6. You'll get an error saying, `No webpage was found for the web address: ....` The web address should be of the form: `https://<your-host>.c-4e4de85.stage.kyma.ondemand.com`. Copy the `your-host` value. You'll need it in the next step.
 
-7. Create an API rule by replacing the values in the [api-rule.yaml](./../files/api-rule.yaml) file.
+7. Make changes to the [api-rule.yaml](./../files/api-rule.yaml) file and apply it using the following command `kubectl apply -f files/api-rule.yaml`.
 8. Open the web address.
