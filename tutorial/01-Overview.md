@@ -26,6 +26,6 @@ cds w
 ```
 
 
-Next: [Deploy Application to Kyma](./02-DeployApplicationToKyma.md)
+Next: [Prepare Kyma Namespace](./02-PrepareKymaNamespace.md)
 
 

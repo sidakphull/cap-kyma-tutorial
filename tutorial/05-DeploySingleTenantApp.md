@@ -55,3 +55,5 @@ Make the following changes in the _`chart/values.yaml`_ file.
     ```bash
     helm install bookshop-{Participant_ID} ./chart --set-file xsuaa.jsonParameters=xs-security.json
     ```
+
+Next: [Continuous Deployment using GitHub Actions](./06-GithubActions.md)

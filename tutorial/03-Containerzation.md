@@ -10,3 +10,5 @@ We will use [Cloud Native Buildpacks](https://buildpacks.io/) to containerize ou
 - Minimal app image: Image contains only what is necessary.
 
 and [many more...](https://buildpacks.io/features/)
+
+Next: [Containerize a CAP Application](./04-BuildImages.md)

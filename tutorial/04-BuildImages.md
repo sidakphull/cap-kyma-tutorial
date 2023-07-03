@@ -69,3 +69,5 @@ docker push $YOUR_CONTAINER_REGISTRY/recap/{Participant_ID}/bookshop-approuter
 
 docker push $YOUR_CONTAINER_REGISTRY/recap/{Participant_ID}/bookshop-hana-deployer
 ```
+
+Next: [Deploy to Kyma](./05-DeploySingleTenantApp.md)
