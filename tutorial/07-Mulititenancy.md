@@ -72,7 +72,7 @@ docker push $YOUR_CONTAINER_REGISTRY/recap/{Participant_ID}/bookshop-sidecar
 
 ## Access
 
-1. Open the `reCAP:Kyma` subaccount and go to `Instances and Subscriptions` tab.
+1. Open the [reCAP:Kyma subaccount](https://canary.cockpit.btp.int.sap/cockpit/#/globalaccount/6a8e3c4e-77ea-482c-b37b-4ce687a8bfe0/subaccount/0eef947e-8e50-4ffa-9676-51ae4db1976d/subaccountoverview) and go to `Instances and Subscriptions` tab.
 2. Click on `Create`.
 3. Search for `bookshop-<participantID>` and select the default plan.
 4. Click on `Create`.
