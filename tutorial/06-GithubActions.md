@@ -6,13 +6,26 @@ GitHub Actions makes it easy to automate all your software workflows, now with w
 
 ## Set up GitHub Actions
 
+### Create token for Technical User
+
+1. Make the required changes to the [service-account.yaml](../files/service-account.yaml) file.
+2. Apply the file using the command `kubectl apply -f ./files/service-account.yaml`.
+
+    This will create a service account resource and give it permissions to manipulate all the resources in your namespace. In contrast to the kubeconfig file from the Kyma dashboard, this token is not based on a user and is well-suited for scenarios like CI/CD pipelines.
+
+3. Make the required changes to the [kubeconfig.sh](../files/kubeconfig.sh) file.
+4. Execute the script using the command `bash files/kubeconfig.sh`.
+5. The script will output a base64 encoded token which you can use as a secret in your workflows in the next step.
+
+### Automatic Workflows
+
 1. Create a folder `.github` and copy the contents of folder `github-workflows` to it.
 2. Go to Settings > Secrets and variables > Actions and the following secrets:
     - `IMAGEPULLSECRET`: Secret to pull images from private repository.
     - `IMAGEREGISTRY`: Your private docker registry.
     - `DOCKER_USERNAME`: Docker username required for pushing images to private registry.
     - `DOCKER_PASSWORD`: Docker password required for pushing images to private registry.
-    - `KUBE_CONFIG`: Base64 encoded Kubeconfig of technical user. (Follow steps in [this](https://developers.sap.com/tutorials/kyma-create-service-account.html) tutorial for to generate technical user's kubeconfig)
-3. Raise the PR to main branch.
+    - `KUBE_CONFIG`: Base64 encoded Kubeconfig of technical user created in [previous](#create-token-for-technical-user) step.
+3. Push the code to the main branch.
 
 Next: [Multitenancy](./07-Mulititenancy.md)
