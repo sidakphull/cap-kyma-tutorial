@@ -12,7 +12,7 @@ GitHub Actions makes it easy to automate all your software workflows, now with w
 
 ## Set up GitHub Actions
 
-1. Copy the `.github` folder from branch [actions.](https://github.com/sidakphull/cap-kyma-tutorial/tree/actions)
+1. Create a folder `.github` and copy the contents of folder `github-workflows` to it.
 2. Go to Settings > Secrets and variables > Actions and the following secrets:
     - `IMAGEPULLSECRET`: Secret to pull images from private repository.
     - `IMAGEREGISTRY`: Your private docker registry.

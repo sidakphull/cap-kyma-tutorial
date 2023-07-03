@@ -1,0 +1,78 @@
+name: "deploy"
+
+description: "Deploys the application to the required environment."
+
+inputs:
+  env:
+    description: "Deployment Environment"
+    required: true
+  IMAGEREGISTRY:
+    description: "Docker Repository"
+    required: true
+  DOCKER_USERNAME:
+    description: "Docker Username"
+    required: true
+  DOCKER_PASSWORD:
+    description: "Docker Password"
+    required: true
+  KUBE_CONFIG:
+    description: "Kube Config"
+    required: true
+  DOMAIN:
+    description: "Host Domain of the cluster"
+    default: c-36c5653.stage.kyma.ondemand.com
+    required: true
+  IMAGEPULLSECRET:
+    description: "Secret with docker credentials"
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+
+    # login to docker
+    - name: Pre Requisites
+      shell: bash
+      run: |
+        docker login ${{inputs.IMAGEREGISTRY}} --username ${{ inputs.DOCKER_USERNAME }} --password ${{ inputs.DOCKER_PASSWORD }}
+
+    # set kubeconfig
+    - name: Installing dependencies
+      shell: bash
+      run: |
+        pwd
+        mkdir -p ${HOME}/kyma-binaries
+        export PATH=${HOME}/kyma-binaries/:$PATH
+        mkdir -p ${HOME}/.kube
+        echo "${{inputs.KUBE_CONFIG}}" | base64 --decode > ${HOME}/.kube/config
+        
+
+    - name: Deploying CAP App using helm chart to kyma environment.
+      id: deploy-to-kyma
+      shell: bash
+      run: |
+        npm i -g @sap/cds-dk
+        tag="tag$(date +%s)"
+        kubectl config set-context --current --namespace=${{ inputs.env }}
+
+        hana_image=${{inputs.IMAGEREGISTRY}}/${{ inputs.env }}/bookshop-hana-deployer:$tag
+        srv_image=${{inputs.IMAGEREGISTRY}}/${{ inputs.env }}/bookshop-srv:$tag
+        approuter_image=${{inputs.IMAGEREGISTRY}}/${{ inputs.env }}/bookshop-approuter:$tag
+        
+        pack build $approuter_image --path app --buildpack gcr.io/paketo-buildpacks/nodejs --builder paketobuildpacks/builder:base --env BP_NODE_RUN_SCRIPTS=""
+        cds build --production
+        pack build $hana_image --path gen/db --buildpack gcr.io/paketo-buildpacks/nodejs --builder paketobuildpacks/builder:base --env BP_NODE_RUN_SCRIPTS=""
+        pack build $srv_image --path gen/srv --buildpack gcr.io/paketo-buildpacks/nodejs --builder paketobuildpacks/builder:base --env BP_NODE_RUN_SCRIPTS=""
+        
+        docker push $approuter_image
+        docker push $hana_image
+        docker push $srv_image
+
+        helm upgrade --set hana_deployer.image.repository=${{inputs.IMAGEREGISTRY}}/${{ inputs.env }}/bookshop-hana-deployer --set hana_deployer.image.tag=${tag} --set srv.image.repository=${{inputs.IMAGEREGISTRY}}/${{ inputs.env }}/bookshop-srv --set srv.image.tag=${tag} --set approuter.image.repository=${{inputs.IMAGEREGISTRY}}/${{ inputs.env }}/bookshop-approuter --set approuter.image.tag=${tag} --set global.domain=${{inputs.DOMAIN}} --set global.imagePullSecret.name=${{inputs.IMAGEPULLSECRET}} --set xsuaa.parameters.oauth2-configuration.redirect-uris[0]=https://*.${{inputs.DOMAIN}}/**  --set xsuaa.parameters.xsappname=bookshop-${{inputs.env}} bookshop ./chart --install
+
+        kubectl rollout status deployment bookshop-srv --timeout=8m
+        kubectl rollout status deployment bookshop-approuter --timeout=8m
+
+        docker rmi $approuter_image
+        docker rmi $hana_image
+        docker rmi $srv_image
