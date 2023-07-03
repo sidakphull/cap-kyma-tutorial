@@ -1,8 +1,5 @@
 # Containerizing a CAP Application
 
-## Prerequisites
-- [pack CLI Tool](https://buildpacks.io/docs/tools/pack/)
-
 ## Overview
 
 A CAP Application (single) usually has three modules:
@@ -18,6 +15,13 @@ Execute the following command to build your modules:
 cds build --production
 ```
 
+## Docker login
+
+Login to docker using the following command:
+
+```bash
+docker login -u "$USERNAME" -p "$API_KEY" $YOUR_CONTAINER_REGISTRY
+```
 
 ## Containerize
 

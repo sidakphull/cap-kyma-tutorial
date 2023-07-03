@@ -1,4 +1,5 @@
 {
+  "welcomeFile": "app/vue/index.html",
   "routes": [
     {
       "source": "^/app/(.*)$",
