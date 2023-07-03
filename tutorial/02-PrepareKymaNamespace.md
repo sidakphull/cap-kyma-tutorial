@@ -14,13 +14,13 @@
 2. Click on `KubeconfigURL` to download the kubeconfig File.
 3. Export the kubeconfig using the command:
 
-Windows:
+    Windows:
 
-`set KUBECONFIG=<path-to-your-downloaded-file>`.
+    `set KUBECONFIG=<path-to-your-downloaded-file>`.
 
-macOS:
+    macOS:
 
-`export KUBECONFIG=<path-to-your-downloaded-file>`.
+    `export KUBECONFIG=<path-to-your-downloaded-file>`.
 
 ### Prepare Kubernetes Namespace
 
