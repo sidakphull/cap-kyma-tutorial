@@ -12,7 +12,15 @@
 
 1. Open the reCAP: Kyma subaccount and go to the Kyma Environment section.
 2. Click on `KubeconfigURL` to download the kubeconfig File.
-3. Export the kubeconfig using the command `set KUBECONFIG=<path-to-your-downloaded-file>`.
+3. Export the kubeconfig using the command:
+
+Windows:
+
+`set KUBECONFIG=<path-to-your-downloaded-file>`.
+
+macOS:
+
+`export KUBECONFIG=<path-to-your-downloaded-file>`.
 
 ### Prepare Kubernetes Namespace
 
