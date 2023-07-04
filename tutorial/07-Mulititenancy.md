@@ -10,6 +10,8 @@ Execute the following command to make the app multitenant:
 cds add multitenancy --for production
 ```
 
+`Note`: Make sure you install the newly added dependencies by executing `npm i`.
+
 ## Build & Containerize
 
 Execute the following command to build the app:
@@ -23,7 +25,7 @@ cds build --production
 **Build image for CAP service:**
 
 ```bash
-pack build $YOUR_CONTAINER_REGISTRY/recap/524884/mt/bookshop-srv \
+pack build $YOUR_CONTAINER_REGISTRY/recap/{Participant_ID}/mt/bookshop-srv \
         --path gen/srv \
         --buildpack gcr.io/paketo-buildpacks/nodejs \
         --builder paketobuildpacks/builder:base \
@@ -33,7 +35,7 @@ pack build $YOUR_CONTAINER_REGISTRY/recap/524884/mt/bookshop-srv \
 **Build image for MTXS Sidecar:**
 
 ```bash
-pack build $YOUR_CONTAINER_REGISTRY/recap/524884/mt/bookshop-sidecar \
+pack build $YOUR_CONTAINER_REGISTRY/recap/{Participant_ID}/bookshop-sidecar \
         --path gen/mtx/sidecar \
         --buildpack gcr.io/paketo-buildpacks/nodejs \
         --builder paketobuildpacks/builder:base \
