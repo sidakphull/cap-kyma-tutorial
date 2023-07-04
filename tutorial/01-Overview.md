@@ -11,15 +11,15 @@ The application allows customers to browse books and order them. Entries are mai
 
 ### Setup
 
-```bash
-cd bookshop
-```
+1. Fork the repository: https://github.com/sidakphull/cap-kyma-app
+2. Clone your fork.
+3. Install the dependencies using the following command:
 
-```bash
-npm i
-```
+    ```bash
+    npm i
+    ```
 
-### Run
+### Run locally
 
 ```bash
 cds w
