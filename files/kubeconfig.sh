@@ -1,5 +1,5 @@
 ns=participant-<id>
-API_SERVER_URL=$(kubectl config view -o=jsonpath='{.clusters[].cluster.server}')
+API_SERVER_URL="https://api.c-4e4de85.stage.kyma.ondemand.com"
 
 SECRET_NAME=tutorial-service-account
 

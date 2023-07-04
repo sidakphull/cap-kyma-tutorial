@@ -3,9 +3,6 @@ name: "deploy"
 description: "Deploys the application to the required environment."
 
 inputs:
-  env:
-    description: "Deployment Environment"
-    required: true
   IMAGEREGISTRY:
     description: "Docker Repository"
     required: true
@@ -20,7 +17,6 @@ inputs:
     required: true
   DOMAIN:
     description: "Host Domain of the cluster"
-    default: c-36c5653.stage.kyma.ondemand.com
     required: true
   IMAGEPULLSECRET:
     description: "Secret with docker credentials"
@@ -53,11 +49,11 @@ runs:
       run: |
         npm i -g @sap/cds-dk
         tag="tag$(date +%s)"
-        kubectl config set-context --current --namespace=${{ inputs.env }}
-
-        hana_image=${{inputs.IMAGEREGISTRY}}/${{ inputs.env }}/bookshop-hana-deployer:$tag
-        srv_image=${{inputs.IMAGEREGISTRY}}/${{ inputs.env }}/bookshop-srv:$tag
-        approuter_image=${{inputs.IMAGEREGISTRY}}/${{ inputs.env }}/bookshop-approuter:$tag
+        
+        participantID=<your-participant-id>
+        hana_image=${{inputs.IMAGEREGISTRY}}/recap/${participantID}/bookshop-hana-deployer:$tag
+        srv_image=${{inputs.IMAGEREGISTRY}}/recap/${participantID}/bookshop-srv:$tag
+        approuter_image=${{inputs.IMAGEREGISTRY}}/recap/${participantID}/bookshop-approuter:$tag
         
         pack build $approuter_image --path app --buildpack gcr.io/paketo-buildpacks/nodejs --builder paketobuildpacks/builder:base --env BP_NODE_RUN_SCRIPTS=""
         cds build --production
@@ -68,7 +64,7 @@ runs:
         docker push $hana_image
         docker push $srv_image
 
-        helm upgrade --set hana_deployer.image.repository=${{inputs.IMAGEREGISTRY}}/${{ inputs.env }}/bookshop-hana-deployer --set hana_deployer.image.tag=${tag} --set srv.image.repository=${{inputs.IMAGEREGISTRY}}/${{ inputs.env }}/bookshop-srv --set srv.image.tag=${tag} --set approuter.image.repository=${{inputs.IMAGEREGISTRY}}/${{ inputs.env }}/bookshop-approuter --set approuter.image.tag=${tag} --set global.domain=${{inputs.DOMAIN}} --set global.imagePullSecret.name=${{inputs.IMAGEPULLSECRET}} --set xsuaa.parameters.oauth2-configuration.redirect-uris[0]=https://*.${{inputs.DOMAIN}}/**  --set xsuaa.parameters.xsappname=bookshop-${{inputs.env}} bookshop ./chart --install
+        helm upgrade --set hana-deployer.image.repository=${{inputs.IMAGEREGISTRY}}/recap/${participantID}/bookshop-hana-deployer --set hana-deployer.image.tag=${tag} --set srv.image.repository=${{inputs.IMAGEREGISTRY}}/recap/${participantID}/bookshop-srv --set srv.image.tag=${tag} --set approuter.image.repository=${{inputs.IMAGEREGISTRY}}/recap/${participantID}/bookshop-approuter --set approuter.image.tag=${tag} --set global.domain=${{inputs.DOMAIN}} --set global.imagePullSecret.name=${{inputs.IMAGEPULLSECRET}} --set xsuaa.parameters.oauth2-configuration.redirect-uris[0]=https://*.${{inputs.DOMAIN}}/**  --set xsuaa.parameters.xsappname=bookshop-${participantID} bookshop-${participantID} ./chart --install
 
         kubectl rollout status deployment bookshop-srv --timeout=8m
         kubectl rollout status deployment bookshop-approuter --timeout=8m

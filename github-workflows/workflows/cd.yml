@@ -17,7 +17,7 @@ jobs:
       # This action downloads and caches distribution of the requested Node.js version and adds it to the PATH.
       - uses: actions/setup-node@v3
         with:
-          node-version: 16
+          node-version: 18
 
       # CI Stage
       - name: Pre Requisites
@@ -64,7 +64,7 @@ jobs:
       # reusable action to deploy on kyma
       - uses: ./.github/actions/deploy
         with:
-          env: dev
+          DOMAIN: ${{ secrets.DOMAIN }}
           IMAGEREGISTRY: ${{ secrets.IMAGEREGISTRY }}
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
