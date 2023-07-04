@@ -66,8 +66,8 @@ runs:
 
         helm upgrade --set hana-deployer.image.repository=${{inputs.IMAGEREGISTRY}}/recap/${participantID}/bookshop-hana-deployer --set hana-deployer.image.tag=${tag} --set srv.image.repository=${{inputs.IMAGEREGISTRY}}/recap/${participantID}/bookshop-srv --set srv.image.tag=${tag} --set approuter.image.repository=${{inputs.IMAGEREGISTRY}}/recap/${participantID}/bookshop-approuter --set approuter.image.tag=${tag} --set global.domain=${{inputs.DOMAIN}} --set global.imagePullSecret.name=${{inputs.IMAGEPULLSECRET}} --set xsuaa.parameters.oauth2-configuration.redirect-uris[0]=https://*.${{inputs.DOMAIN}}/**  --set xsuaa.parameters.xsappname=bookshop-${participantID} bookshop-${participantID} ./chart --install
 
-        kubectl rollout status deployment bookshop-srv --timeout=8m
-        kubectl rollout status deployment bookshop-approuter --timeout=8m
+        kubectl rollout status deployment bookshop-${participantID}-srv --timeout=8m
+        kubectl rollout status deployment bookshop-${participantID}-approuter --timeout=8m
 
         docker rmi $approuter_image
         docker rmi $hana_image
