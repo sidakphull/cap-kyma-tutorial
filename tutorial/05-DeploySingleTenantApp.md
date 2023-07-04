@@ -47,7 +47,7 @@ Make the following changes in the _`chart/values.yaml`_ file.
       domain: <xyz123>.kyma.ondemand.com
     -  imagePullSecret: {}
     +  imagePullSecret:
-    +    name: container-registry
+    +    name: docker-secret
     ```
 
 7. Install the helm chart with the following command:
