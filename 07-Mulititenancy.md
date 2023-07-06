@@ -9,7 +9,7 @@ CAP has built-in support for multitenancy with the @sap/cds-mtxs package.
 Execute the following command to make the app multitenant:
 
 ```bash
-cds add multitenancy --for production
+cds add mtx --for production
 ```
 
 `Note`: Make sure you install the newly added dependencies by executing `npm i`.

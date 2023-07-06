@@ -3,7 +3,7 @@
 ### Prerequisites
 
 - Command Line Tools: [`kubectl`](https://kubernetes.io/de/docs/tasks/tools/install-kubectl/), [`kubectl-oidc_login`](https://github.com/int128/kubelogin#setup), [`pack`](https://buildpacks.io/docs/tools/pack/), [`docker`](https://docs.docker.com/get-docker/), [`helm`](https://helm.sh/docs/intro/install/)
-- `@sap/cds-dk` >= 6.8.3
+- `@sap/cds-dk` >= 7.0.1
 
 ## Prepare your application for deployment
 
