@@ -29,7 +29,7 @@ Change namespace to your own using: `kubectl config set-context --current --name
 #### Create container registry secret
 
 
-Create a secret `container-registry` with credentials to access the container registry:
+Create a secret `docker-secret` with credentials to access the container registry:
 
 ```bash
 kubectl create secret docker-registry docker-secret --docker-username=$USERNAME --docker-password=$API_KEY --docker-server=$YOUR_CONTAINER_REGISTRY 
@@ -37,7 +37,5 @@ kubectl create secret docker-registry docker-secret --docker-username=$USERNAME 
 
 This will create a K8s secret, `docker-secret`, in your namespace.
 
-
-// TODO: Explain about HANA Cloud Instance mapping to Kyma https://blogs.sap.com/2022/12/15/consuming-sap-hana-cloud-from-the-kyma-environment/
 
 Next: [Containerization](./03-Containerzation.md)

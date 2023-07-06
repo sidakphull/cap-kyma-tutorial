@@ -8,12 +8,12 @@ GitHub Actions makes it easy to automate all your software workflows, now with w
 
 ### Create token for Technical User
 
-1. Make the required changes to the `service-account.yaml` file available in the `files` folder of your fork.
+1. Configure your participant id in the `service-account.yaml` file available in the `files` folder of your fork.
 2. Apply the file using the command `kubectl apply -f ./files/service-account.yaml`.
 
     This will create a service account resource and give it permissions to manipulate all the resources in your namespace. In contrast to the kubeconfig file from the Kyma dashboard, this token is not based on a user and is well-suited for scenarios like CI/CD pipelines.
 
-3. Make the required changes to the `kubeconfig.sh` file available in the `files` folder of your fork.
+3. Configure your participant id in the `kubeconfig.sh` file available in the `files` folder of your fork.
 4. Execute the script using the command `bash files/kubeconfig.sh`.
 5. The script will output a base64 encoded token which you can use as a secret in your workflows in the next step.
 
@@ -27,6 +27,7 @@ GitHub Actions makes it easy to automate all your software workflows, now with w
     - `DOCKER_USERNAME`: Docker username required for pushing images to private registry.
     - `DOCKER_PASSWORD`: Docker password required for pushing images to private registry.
     - `DOMAIN`: Host domain of the cluster.
-3. Push the code to the main branch.
+3. Configure the participant id in the `.github/actions/deploy/action.yml` file.
+4. Push the code to the main branch.
 
 Next: [Multitenancy](./07-Mulititenancy.md)
