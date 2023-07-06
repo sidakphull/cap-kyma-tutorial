@@ -22,7 +22,7 @@ The application allows customers to browse books and order them. Entries are mai
 ### Run locally
 
 ```bash
-cds w
+npm start
 ```
 
 

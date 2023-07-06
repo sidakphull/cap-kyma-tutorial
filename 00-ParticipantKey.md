@@ -9,8 +9,7 @@ $API_KEY :
 $YOUR_CONTAINER_REGISTRY : 
 
 Kyma Configurations: 
-NameSpace: Test-ParticipantID
-Kubeconfig file: <FolderPath>/ParticipantID
+NameSpace: participant-<id>
 
 
 
