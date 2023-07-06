@@ -1,6 +1,8 @@
 # Multitenancy
 
-// explain
+Multitenancy is the ability to serve multiple tenants through single clusters of microservice instances, while strictly isolating the tenants' data.
+In contrast to single-tenant mode, applications aren't serving end-user request immediately after deployment, but wait for tenants to subscribe.
+CAP has built-in support for multitenancy with the @sap/cds-mtxs package.
 
 ## Make CAP Application Multitenant
 
