@@ -19,7 +19,7 @@ GitHub Actions makes it easy to automate all your software workflows, now with w
 
 ### Automatic Workflows
 
-1. Create a folder `.github` and copy the contents of folder `github-workflows` to it.
+1. Rename the folder `github-workflows` to `.github`.
 2. In your forked respository, go to `Settings` > `Secrets and variables` > `Actions` and the following secrets:
     - `KUBE_CONFIG`: Base64 encoded token of technical user created in [previous](#create-token-for-technical-user) step.
     - `IMAGEPULLSECRET`: The name of the secret to pull images from private repository.

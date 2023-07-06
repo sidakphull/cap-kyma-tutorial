@@ -11,7 +11,7 @@ The application allows customers to browse books and order them. Entries are mai
 
 ### Setup
 
-1. Fork the repository: https://github.com/sidakphull/cap-kyma-app
+1. Fork the repository: https://github.com/sidakphull/recap-kyma-app
 2. Clone your fork.
 3. Install the dependencies using the following command:
 
